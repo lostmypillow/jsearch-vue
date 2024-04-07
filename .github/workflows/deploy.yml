@@ -24,10 +24,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Install PNPM
+        uses: pnpm/action-setup@v3
+        with:
+            version: 8
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+              node-version: 20
+              cache: 'pnpm'
       - name: Install dependencies
-        shell: bash
-        run: pnpm i
-
+        run: pnpm install
       - name: Build
         run: npx nuxi generate
         env:
