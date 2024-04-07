@@ -8,4 +8,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  runtimeConfig: {
+    public: {
+      API_KEY: process.env.NUXT_API_KEY
+    }
+  }
 })
