@@ -1,111 +1,22 @@
 <script setup>
-import axios from 'axios'
-const title = ref("");
-// const apiKey = ref("");
-const searchTerm = ref("");
-const keyExists = ref("");
-const movies = [
-  {
-    "Title": "Batman Begins",
-    "Year": "2005",
-    "imdbID": "tt0372784",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
-  },
-  {
-    "Title": "The Batman",
-    "Year": "2022",
-    "imdbID": "tt1877830",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BM2MyNTAwZGEtNTAxNC00ODVjLTgzZjUtYmU0YjAzNmQyZDEwXkEyXkFqcGdeQXVyNDc2NTg3NzA@._V1_SX300.jpg"
-  },
-  {
-    "Title": "Batman v Superman: Dawn of Justice",
-    "Year": "2016",
-    "imdbID": "tt2975590",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BYThjYzcyYzItNTVjNy00NDk0LTgwMWQtYjMwNmNlNWJhMzMyXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
-  },
-  {
-    "Title": "Batman",
-    "Year": "1989",
-    "imdbID": "tt0096895",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BZWQ0OTQ3ODctMmE0MS00ODc2LTg0ZTEtZWIwNTUxOGExZTQ4XkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_SX300.jpg"
-  },
-  {
-    "Title": "Batman Returns",
-    "Year": "1992",
-    "imdbID": "tt0103776",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BOGZmYzVkMmItM2NiOS00MDI3LWI4ZWQtMTg0YWZkODRkMmViXkEyXkFqcGdeQXVyODY0NzcxNw@@._V1_SX300.jpg"
-  },
-  {
-    "Title": "Batman & Robin",
-    "Year": "1997",
-    "imdbID": "tt0118688",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMGQ5YTM1NmMtYmIxYy00N2VmLWJhZTYtN2EwYTY3MWFhOTczXkEyXkFqcGdeQXVyNTA2NTI0MTY@._V1_SX300.jpg"
-  },
-  {
-    "Title": "Batman Forever",
-    "Year": "1995",
-    "imdbID": "tt0112462",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BNDdjYmFiYWEtYzBhZS00YTZkLWFlODgtY2I5MDE0NzZmMDljXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
-  },
-  {
-    "Title": "The Lego Batman Movie",
-    "Year": "2017",
-    "imdbID": "tt4116284",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMTcyNTEyOTY0M15BMl5BanBnXkFtZTgwOTAyNzU3MDI@._V1_SX300.jpg"
-  },
-  {
-    "Title": "Batman: The Animated Series",
-    "Year": "1992–1995",
-    "imdbID": "tt0103359",
-    "Type": "series",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BZmVkNDc3YjQtZDMzOS00MTNjLTljNzUtZDhjYWQxMmVlNjE5XkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_SX300.jpg"
-  },
-  {
-    "Title": "Batman v Superman: Dawn of Justice (Ultimate Edition)",
-    "Year": "2016",
-    "imdbID": "tt18689424",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BOTRlNWQwM2ItNjkyZC00MGI3LThkYjktZmE5N2FlMzcyNTIyXkEyXkFqcGdeQXVyMTEyNzgwMDUw._V1_SX300.jpg"
-  }
-]
-
-async function searchMovies() {
-  try {
-  
-    const response = await axios.get('https://www.omdbapi.com/?apikey=' + runtimeConfig.public.API_KEY + '&s=' + searchTerm.value);
-    console.log(response.data.Search);
-    F.value = response.data.Search
-    keyExists.value = true
-  } catch (error) {
-    keyExists.value = false
-    console.error(error);
-    console.log(keyExists.value)
-  }
-}
-const runtimeConfig = useRuntimeConfig()
-
-
-// function whatsmyenv() {
-//   console.log()
-// }
-
+const route = useRoute()
+const router = useRouter()
 </script>
 
-<template>
-  <input class="outline-none border-none bg-rose-400 rounded-full px-4 py-2 text-white" v-model="searchTerm"/>
-  <button class="border-2 border-rose-400 rounded-full px-4 py-2" @click="">click</button>
-  <span>search term is: {{ searchTerm }}</span>
-  <p v-if="keyExists">API Success</p>
-  <p v-if="keyExists == false">API Key incorrect</p>
 
-  <Card v-for="movie in movies" :smalltext="movie.Type" :title="movie.Title" :subtitle="movie.Year"
-    :image="movie.Poster" />
+<template>
+  <div class="w-screen h-screen">
+    <div class="flex flex-row mb-4 items-center justify-start gap-2">
+      <button v-if="route.fullPath != '/'" class="flex flex-row border-2 border-black rounded-full px-4 py-2 w-fit h-11" @click="router.back()">
+            <ArrowLeftSVG />
+            Back</button>
+    <h1 v-if="route.fullPath == '/'" class="flex items-center w-screen h-11 text-3xl shrink-0">JSearch</h1>
+
+
+    <h1 v-else class="flex items-center w-screen h-11 text-3xl shrink-0">{{ route.fullPath.charAt(1).toUpperCase() + route.fullPath.slice(2) }}</h1>
+    </div>
+    
+  <NuxtPage />
+  </div>
+
 </template>
