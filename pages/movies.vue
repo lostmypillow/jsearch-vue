@@ -5,6 +5,9 @@ const keyExists = ref(true);
 const movies = ref([])
 const ErrorMessage = ref("")
 const runtimeConfig = useRuntimeConfig()
+function handleSearch(n) {
+    searchTerm.value = n
+}
 
 async function searchMovies() {
     try {
@@ -29,24 +32,19 @@ async function searchMovies() {
 <template>
     <div class="flex flex-col md:flex-row gap-2 items-center justify-center mb-4">
 
-        <input
-            class="outline-none border-none bg-black rounded-full px-4 py-2 text-white w-full items-center justify-center h-11 md:w-[50%]"
-            v-model="searchTerm" placeholder="Search movies" />
 
+        <SearchInput @input="handleSearch" />
         <SearchButton @click="searchMovies" />
 
         <span v-if="keyExists == false">API Key incorrect</span>
 
     </div>
 
-    <ErrorMessage v-if="ErrorMessage != null">
+    <!-- <ErrorMessage v-if="ErrorMessage != null">
         {{ ErrorMessage }}
-    </ErrorMessage>
+    </ErrorMessage> -->
 
-    <Card v-for="movie in movies" 
-    :smalltext="movie.Type" 
-    :title="movie.Title" 
-    :subtitle="movie.Year"
-    :image="movie.Poster" />
+    <Card v-for="movie in movies" :smalltext="movie.Type" :title="movie.Title" :subtitle="movie.Year"
+        :image="movie.Poster" />
 
 </template>

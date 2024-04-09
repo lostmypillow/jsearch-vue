@@ -5,3 +5,12 @@
     height: 100svh;
     width: 100svw;
 }
+html {
+    margin: 0 auto;
+}
+
+body {
+    margin: 0 auto;
+}
+
+ /* *{outline:1px solid red;}   */
