@@ -10,13 +10,13 @@ const router = useRouter()
     <div class="flex flex-row m-4 items-center justify-start gap-2">
       <button 
       v-if="route.fullPath != '/'"
-      class="flex flex-row border-2 border-black rounded-full items-center justify-center px-2 w-20 h-11  hover:border-white hover:bg-black hover:text-white" 
+      class="flex flex-row border-2 border-black  bg-black  text-white rounded-full items-center justify-center px-2 w-20 h-11  hover:border-white hover:bg-white hover:text-black" 
       @click="router.back()">
       <ArrowLeftSVG />
       Back
       </button>
 
-      <NuxtLink v-else to="/" class="flex flex-row border-2 border-black rounded-full items-center justify-center px-2 min-w-20 h-11 text-2xl font-semibold hover:border-white hover:bg-black hover:text-white">
+      <NuxtLink v-else to="/" class="flex flex-row border-2 border-none bg-black text-white rounded-full items-center justify-center px-2 min-w-20 h-11 text-2xl font-semibold  hover:bg-white hover:text-black">
         J
         <SearchSVG class="mt-1" />
       </NuxtLink> 
