@@ -13,14 +13,15 @@ async function searchMovies() {
     try {
         const response = await axios.get('https://www.omdbapi.com/?apikey=' + runtimeConfig.public.API_KEY + '&s=' + searchTerm.value);
         movies.value = response.data.Search
+        console.log(movies.value)
         keyExists.value = true
         if (response.data.Error != null) {
-            movieError.value = response.data.Error
+            // movieError.value = response.data.Error
         } else {
             movieError.value = false
         }
     } catch (error) {
-        movieError.value = response.data.Error
+        // movieError.value = response.data.Error
     }
 }
 </script>
@@ -35,7 +36,7 @@ async function searchMovies() {
     <ErrorMessage v-if="apiError" :type="apiError" />
 
     <MovieResults>
-        <Card v-for="movie in movies" :smalltext="movie.Type" :title="movie.Title" :subtitle="movie.Year"
+        <Card v-for="movie in movies" :key="movie.imdbID" :smalltext="movie.Type" :title="movie.Title" :subtitle="'(' + movie.Year + ')'"
             :image="movie.Poster" />
     </MovieResults>
 </template>

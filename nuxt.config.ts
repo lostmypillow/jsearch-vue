@@ -32,4 +32,9 @@ export default defineNuxtConfig({
       API_KEY: process.env.NUXT_API_KEY,
     },
   },
+  // nuxt.config.ts
+
+  modules: ['@formkit/auto-animate/nuxt'],
+
+
 });

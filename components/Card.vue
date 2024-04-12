@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['smalltext', 'title', 'subtitle', 'image'])
+defineProps(['smalltext', 'title', 'subtitle', 'image', 'description'])
 
 
 </script>
@@ -17,6 +17,9 @@ defineProps(['smalltext', 'title', 'subtitle', 'image'])
             </h3>
             <div class="text-lg">
                 {{ title }} <br class="md:hidden"> ({{ subtitle }})
+            </div>
+            <div>
+                {{ description }}
             </div>
         </div>
 

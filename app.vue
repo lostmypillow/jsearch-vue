@@ -29,8 +29,8 @@ const router = useRouter()
     </h1>
 
     </div>
-    
-  <NuxtPage />
+    <div  > <NuxtPage v-auto-animate /></div>
+ 
   </div>
 
 </template>
