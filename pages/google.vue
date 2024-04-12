@@ -1,7 +1,7 @@
 <script setup>
 import axios from 'axios'
 
-const results = {
+const response = {
   "search_term": "Nike",
   "knowledge_panel":
   {
@@ -197,7 +197,9 @@ const results = {
       ]
   }
 }
-
+const knowledge_panel = response.knowledge_panel
+const results = response.results
+const related_keywords = response.related_keywords.keywords
 // async function searchGoogle() {
 //   const options = {
 //     method: 'GET',
@@ -224,24 +226,15 @@ const results = {
 </script>
 
 <template>
-  <!-- <MovieInteract>
-        <SearchInput @input="handleSearch" />
-        <SearchButton @click="searchMovies" />
-    </MovieInteract>
-
-    <ErrorMessage v-if="movieError" :type="movieError" />
-    <ErrorMessage v-if="apiError" :type="apiError" />
-
-    <MovieResults>
-        <Card v-for="movie in movies" :key="movie.imdbID" :smalltext="movie.Type" :title="movie.Title" :subtitle="movie.Year"
-            :image="movie.Poster" />
-    </MovieResults> -->
-  <p>google</p>
+  <!-- <p>google</p> -->
   <!-- <button @click="searchGoogle">search</button> -->
-  <p>{{ results.knowledge_panel }}</p>
-  <KnowledgePanel
-  :name="results.knowledge_panel.name"
-  :label="results.knowledge_panel.label"
-  :desc_text="results.knowledge_panel.description.text" :desc_site="results.knowledge_panel.description.site"
-  :desc_url="results.knowledge_panel.description.url" />
+  <!-- <p>{{ results }}</p> -->
+  <span>You searched for {{ response.search_term }}</span>
+  <div class="flex flex-row gap-2">
+    <span v-for="r in related_keywords" :key="r.position">{{ r }}</span>
+  </div>
+ 
+  <KnowledgePanel :knowledge_panel="knowledge_panel"/>
+  <GoogleResults :results="results" />
+  
 </template>

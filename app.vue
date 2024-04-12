@@ -16,7 +16,7 @@ const router = useRouter()
       Back
       </button>
 
-      <NuxtLink v-else to="/" class="flex flex-row border-2 border-none bg-black text-white rounded-full items-center justify-center px-2 min-w-20 h-11 text-2xl font-semibold  hover:bg-white hover:text-black">
+      <NuxtLink v-else to="/" class="flex flex-row border-2 bg-black text-white rounded-full items-center justify-center px-2 min-w-20 h-11 text-2xl font-semibold"  >
         J
         <SearchSVG class="mt-1" />
       </NuxtLink> 
