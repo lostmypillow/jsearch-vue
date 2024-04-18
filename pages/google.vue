@@ -230,9 +230,9 @@ const related_keywords = response.related_keywords.keywords
   <!-- <button @click="searchGoogle">search</button> -->
   <!-- <p>{{ results }}</p> -->
   <span>You searched for {{ response.search_term }}</span>
-  <div class="flex flex-row gap-2">
+  <!-- <div class="flex flex-row gap-2">
     <span v-for="r in related_keywords" :key="r.position">{{ r }}</span>
-  </div>
+  </div> -->
  
   <KnowledgePanel :knowledge_panel="knowledge_panel"/>
   <GoogleResults :results="results" />
