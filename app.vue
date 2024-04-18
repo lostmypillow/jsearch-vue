@@ -9,7 +9,7 @@ const router = useRouter()
 
 
     <NavBar>
-      <NavButton />
+      <NavBtn />
       <NavName />
     </NavBar>
 

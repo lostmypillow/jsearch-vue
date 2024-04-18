@@ -34,7 +34,13 @@ export default defineNuxtConfig({
   },
   // nuxt.config.ts
 
-  modules: ['@formkit/auto-animate/nuxt'],
+  modules: ['@formkit/auto-animate/nuxt', '@nuxtjs/google-fonts'],
+  googleFonts: {
+    download: true,
+    families: {
+      "Noto Sans TC": true
+    }
+  }
 
 
 });

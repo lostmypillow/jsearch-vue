@@ -1,20 +1,27 @@
 <script setup>
-defineProps(['name', 'label', 'desc_text', 'desc_site', 'desc_url', 'image', 'knowledge_panel'])
+defineProps(['knowledge_panel'])
 
 const showMore = ref(false)
 </script>
 
 <template>
+
+
    <div
-      class="flex flex-col items-start justify-center gap-4 border-2 border-black min-h-24  mx-4 my-8 px-4 py-8 rounded-3xl backdrop-blur-3xl grow">
+      class="flex flex-col items-start justify-center gap-2 border-2 border-black min-h-24  mx-4 my-8 p-4 rounded-3xl backdrop-blur-3xl grow">
+      <h3 class="text-sm font-light">KNOWLEDGE PANEL</h3>
 
-      <h1 class="text-sm">KNOWLEDGE PANEL</h1>
+      <div class="flex flex-row w-full items-center justify-between">
+         <h1 class="text-2xl">
+            {{ knowledge_panel.name }} 
+         </h1>
+         <img class="max-w-10" :src="knowledge_panel.image.url" alt="image">
+      </div>
 
-      <h2 class="text-2xl">
-         {{ knowledge_panel.name }} ({{ knowledge_panel.label }})
-      </h2>
+      <h2 class="text-base font-light">
+            {{ knowledge_panel.label }}
+         </h2>
 
-      <img :src="knowledge_panel.image.url" alt="image">
 
       <div class="text-base">
          &emsp;{{ knowledge_panel.description.text }}
@@ -26,17 +33,31 @@ const showMore = ref(false)
             {{ knowledge_panel.description.site }}
          </NuxtLink>
       </div>
+      <br>
+      <NavButton @click="showMore = !showMore">
+         <div class=" flex flex-row" v-if="showMore == false">
+            <PlusSVG />
+            Show More Info
+         </div>
+         <div class=" flex flex-row" v-else>
+            <MinusSVG />
+            Show Less Info
+         </div>
+      </NavButton>
 
-      <button @click="showMore = !showMore">Show More info</button>
-      <div v-show="showMore">
-         <div v-for="inf in knowledge_panel.info">
-            {{ inf.title }}:
-            <div v-for="label in inf.labels">
-               {{ label }}
+      <div v-auto-animate>
+         <div v-if="showMore" class="flex flex-col gap-4">
+            <div v-for="inf in knowledge_panel.info">
+
+
+               <div class="font-bold"> {{ inf.title }}:</div>
+
+               <div v-for="label in inf.labels">
+                  {{ label }}
+               </div>
             </div>
          </div>
+
       </div>
-
-
    </div>
 </template>

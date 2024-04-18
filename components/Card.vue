@@ -15,10 +15,12 @@ defineProps(['smalltext', 'title', 'subtitle', 'image', 'description'])
             <h3 class="text-sm font-light">
                 {{ smalltext }}
             </h3>
-            <div class="text-lg">
-                {{ title }} <br class="md:hidden"> ({{ subtitle }})
+            <div class="text-xl font-bold">
+                {{ title }} <br class="md:hidden"> 
+                <div class="text-base font-semibold">{{ subtitle }}</div>
+                
             </div>
-            <div>
+            <div class="text-base">
                 {{ description }}
             </div>
         </div>
