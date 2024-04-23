@@ -1,22 +1,29 @@
 <script setup>
-const route = useRoute()
-const router = useRouter()
+const searchTerm = ref("")
+function handleSearch(n) {
+    searchTerm.value = n
+}
 </script>
 
 
 <template>
-  <div class="max-w-screen max-h-screen">
 
 
+  <!-- 
     <NavBar>
       <NavBtn />
       <NavName />
-    </NavBar>
+    </NavBar> -->
+  <Main>
+    <ResponsiveTop>
+      <NavBar />
+      <SearchBar @input="handleSearch" @requestSearch="" />
+    </ResponsiveTop>
 
+ <ResponsiveBottom>
+    <NuxtPage v-auto-animate :searchTerm="searchTerm"/>
+  </ResponsiveBottom>
+  </Main>
 
-    <NuxtPage v-auto-animate />
-
-
-  </div>
 
 </template>

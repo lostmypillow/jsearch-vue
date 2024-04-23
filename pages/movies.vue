@@ -1,13 +1,13 @@
 <script setup>
 import axios from 'axios'
+defineProps['searchTerm']
+
 const searchTerm = ref("");
 const apiError = ref(false);
 const movies = ref([])
 const movieError = ref(false)
 const runtimeConfig = useRuntimeConfig()
-function handleSearch(n) {
-    searchTerm.value = n
-}
+
 
 async function searchMovies() {
     try {
@@ -27,10 +27,10 @@ async function searchMovies() {
 </script>
 
 <template>
-    <MovieInteract>
+    <!-- <MovieInteract>
         <SearchInput @input="handleSearch" />
         <SearchButton @click="searchMovies" />
-    </MovieInteract>
+    </MovieInteract> -->
 
     <ErrorMessage v-if="movieError" :type="movieError" />
     <ErrorMessage v-if="apiError" :type="apiError" />
