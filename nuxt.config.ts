@@ -1,40 +1,27 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+
 export default defineNuxtConfig({
-  ssr: false,
-  app: {
-    baseURL: "/JSearch",
-    head: {
-      meta: [
-        {
-          name: "viewport",
-          content: "width=device-width, initial-scale=1",
-        },
-        {
-          charset: "utf-8",
-        },
-      ],
-      link: [],
-      style: [],
-      script: [],
-      noscript: [],
-    },
-  },
   devtools: { enabled: true },
-  css: ["~/assets/css/main.css"],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
+  build: {
+    transpile: ['vuetify'],
+  },
+  modules: [
+     '@nuxtjs/tailwindcss',
+     (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
+
+  ],
+  vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
     },
   },
-  runtimeConfig: {
-    public: {
-      API_KEY: process.env.NUXT_API_KEY,
-    },
-  },
-  // nuxt.config.ts
-
-  modules: ['@formkit/auto-animate/nuxt'],
-  
-
-});
+  css: ['~/assets/css/main.css'],
+})
