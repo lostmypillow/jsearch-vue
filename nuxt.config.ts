@@ -2,6 +2,7 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
+  app: {baseURL: '/jsearch-vue'},
   devtools: { enabled: true },
   build: {
     transpile: ['vuetify'],
