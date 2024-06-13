@@ -21,7 +21,7 @@ async function onClick() {
     getMovies()
   } else { getGoogle() }
   loading.value = false
-  loaded.value = true
+
 
 }
 
