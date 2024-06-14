@@ -220,7 +220,7 @@ async function getGoogle() {
 
     <div v-else class="flex flex-col flex-wrap items-center justify-center w-full gap-4 pt-4">
 
-      <v-card v-if="data.knowledge_panel" class="md:w-2/3" :title="data.knowledge_panel.name" :subtitle="data.knowledge_panel.label"
+      <v-card v-if="data.knowledge_panel != null" class="md:w-2/3" :title="data.knowledge_panel.name" :subtitle="data.knowledge_panel.label"
         :text="data.knowledge_panel.description.text" variant="tonal">
         <v-img :height="data.knowledge_panel.image.height" :width="data.knowledge_panel.image.width"
           :src="data.knowledge_panel.image.url" cover />
