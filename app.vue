@@ -1,76 +1,45 @@
 <script setup>
-const toggle = ref("dark")
-const searchType = ref("movies")
-const searchTerm = ref()
+const toggle = ref('light')
+const route = useRoute()
+const type = computed(() => route.query.type)
+const searchType = ref('movies')
+const query = computed(() => route.query.query)
+const searchTerm = ref('')
 const searchLabel = computed(() => {
   return searchType.value == "movies" ? "Search with OMDb API" : " Search with RapidAPI"
 })
 const loading = ref(false)
-const route = useRoute()
-const data = ref()
-const type = computed(() => route.query.type)
-const query = computed(() => route.query.query)
+
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+watch( toggle, (newtoggle) => {
+  toggleTheme()
+})
 
 
-async function onClick() {
+function toggleTheme() {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
+
+
+function onClick() {
   loading.value = true
-  await navigateTo({
+  navigateTo({
     path: '/search',
     query: {
       type: searchType.value,
       query: searchTerm.value,
     }
   })
-  console.log(type.value)
-  getALl()
-
-
-}
-
-// onMounted(() => {
-//   getALl()
-// })
-
-function getALl() {
-  if (type.value == "movies") {
-    getMovies()
-  } else if (type.value == "google") {
-    getGoogle()
-  }
-}
-
-
-async function getMovies() {
-  loading.value = true
-  const result = await $fetch("https://www.omdbapi.com/?apikey=e9cb394&s=" + query.value);
-  data.value = result.Search
+  console.log("naved")
   loading.value = false
-  console.log(result.Search)
-  console.log("searched movie")
+
+
+
 }
 
-async function getGoogle() {
-  loading.value = true
-  const todo = await $fetch('https://google-search74.p.rapidapi.com', {
-    method: 'GET',
-    params: {
-      query: query.value,
-      limit: "10",
-      related_keywords: "false",
-    },
-    headers: {
-      "X-RapidAPI-Key":
-        "4cc2304fb3msh28544a85c39f266p17c92bjsnd635c2ee140a",
-      "X-RapidAPI-Host": "google-search74.p.rapidapi.com",
-    },
-  })
-  data.value = todo
-  loading.value = false
-  console.log(todo)
-  console.log("searched google")
-}
-
-// 
 </script>
 
 
@@ -103,9 +72,9 @@ async function getGoogle() {
 
         <div class="flex flex-col pt-4 w-full items-center">
 
-          <v-progress-circular v-if="loading" indeterminate />
+          <!-- <v-progress-circular v-if="loading" indeterminate /> -->
 
-          <NuxtPage :data="data" />
+          <NuxtPage  />
 
         </div>
 
