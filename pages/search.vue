@@ -39,7 +39,7 @@ const expand = ref(false)
   <div v-else
   class="flex flex-col flex-wrap items-center justify-center w-full gap-4 pt-4">
 
-    <v-card 
+    <v-card v-if="$attrs.data.knowledge_panel != null"
     class="md:w-2/3"
     :title="$attrs.data.knowledge_panel.name"
     :subtitle="$attrs.data.knowledge_panel.label"
