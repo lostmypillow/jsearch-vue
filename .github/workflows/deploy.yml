@@ -1,4 +1,4 @@
-name: jsearch-to-github-pages
+name: jsearch-vue-to-github-pages
 on:
   push:
     branches:
