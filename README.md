@@ -1,5 +1,3 @@
-# JSearch but in Vue
+# JSearch (Vue frontend)
 
-__**Planned integration with a Django web app repo with a better README forthcoming!!!**__
-
-A better version of [JSearch React] made with **Nuxt(Vue)** and **Vuetify**(https://github.com/lostmypillow/jsearch-react)
+__**I use Render's free tier to host the API backend, so there WILL be a slight delay when the server wakes itself (also known as a cold start). Sorry for the inconvenience and please be patient.**__
