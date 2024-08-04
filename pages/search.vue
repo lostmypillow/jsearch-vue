@@ -47,7 +47,7 @@ function getALl() {
 
 async function getMovies() {
 
-  const result = await fetch("/get-movies/?query="+query.value);
+  const result = await fetch("https://jsearch.onrender.com/api/get-movies/?query="+query.value);
   const response = await result.json()
   console.log(response.results.Search)
   data.value = await response.results.Search
@@ -58,7 +58,7 @@ async function getMovies() {
 
 async function getGoogle() {
 
-  const todo = await fetch('/get-google/?query='+query.value+"&limit=10&related=false")
+  const todo = await fetch('https://jsearch.onrender.com/api/get-google/?query='+query.value+"&limit=10&related=false")
   const response = await todo.json()
   console.log(response.results)
   data.value = await response.results
