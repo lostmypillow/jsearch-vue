@@ -72,7 +72,7 @@ function onClick() {
 
         <div class="flex flex-col pt-4 w-full items-center">
 
-          <!-- <v-progress-circular v-if="loading" indeterminate /> -->
+          <v-progress-circular v-if="loading" indeterminate />
 
           <NuxtPage  />
 

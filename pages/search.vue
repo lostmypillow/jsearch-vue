@@ -47,21 +47,44 @@ function getALl() {
 
 async function getMovies() {
 
+  
+ 
+  try {
+  const result = await fetch("https://jsearch.lostmypillow.duckdns.org/api/get-movies/?query="+query.value);
+  const response = await result.json()
+  console.log(response.results.Search)
+} catch (error) {
+  console.log(error)
   const result = await fetch("https://jsearch.onrender.com/api/get-movies/?query="+query.value);
   const response = await result.json()
   console.log(response.results.Search)
+
+} finally {
   data.value = await response.results.Search
-  
+}
+
   // console.log(result.Search)
   // console.log("searched movie")
 }
 
 async function getGoogle() {
 
+
+  
+
+
+  try {
+    const todo = await fetch('https://jsearch.lostmypillow.duckdns.org/api/get-google/?query='+query.value+"&limit=10&related=false")
+  const response = await todo.json()
+  console.log(response.results)
+} catch (exceptionVar) {
   const todo = await fetch('https://jsearch.onrender.com/api/get-google/?query='+query.value+"&limit=10&related=false")
   const response = await todo.json()
   console.log(response.results)
-  data.value = await response.results
+} finally {
+data.value = await response.results
+}
+
 }
 
 </script>
