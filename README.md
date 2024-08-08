@@ -1,11 +1,16 @@
 # JSearch
 ## What is it?
-A full stack search engine for movies and Google search. Consumes OMDb API and a random rate limited RapidAPI. One of my oldest projects that started from a [React version](https://github.com/lostmypillow/jsearch-react), then I made a Vue version of the same website (this repo), which is actually functional and the version that works with the [FastAPI server](https://github.com/lostmypillow/jsearch).
+A full stack search engine for movies and Google search. Consumes OMDb API and a random rate limited RapidAPI.
+
+Works with the [FastAPI server in this repo](https://github.com/lostmypillow/jsearch). API hosted on my own RPi 3B+, automatically switches to backup API hosted on Render.com in case RPi is down.
+
+Features dark/light mode switch.
+
 
 [**Demo website**](https://lostmypillow.github.io/jsearch-vue)
 [**API Documentation**](https://jsearch.lostmypillow.duckdns.org/docs)
 
-[**Backup API Docs (Loads slow!)**](https://jsearch.onrender.com/docs)
+[**Backup API Docs (Render.com's free tier so might be slow to load!)**](https://jsearch.onrender.com/docs)
 
 ## How does it work?
 1. User inputs a value in Vue frontend

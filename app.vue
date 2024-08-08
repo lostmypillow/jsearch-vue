@@ -25,7 +25,7 @@ function toggleTheme() {
 
 
 function onClick() {
-  loading.value = true
+
   navigateTo({
     path: '/search',
     query: {
@@ -33,8 +33,8 @@ function onClick() {
       query: searchTerm.value,
     }
   })
-  console.log("naved")
-  loading.value = false
+  // console.log("naved")
+  // loading.value = false
 
 
 
@@ -72,7 +72,7 @@ function onClick() {
 
         <div class="flex flex-col pt-4 w-full items-center">
 
-          <v-progress-circular v-if="loading" indeterminate />
+        
 
           <NuxtPage  />
 
