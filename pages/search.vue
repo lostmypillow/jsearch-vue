@@ -53,51 +53,86 @@ async function getALl() {
 
 async function getMovies() {
 
-  
-  isLoading.value = true
   try {
-  const result = await fetch("https://jsearch.lostmypillow.duckdns.org/api/get-movies/?query="+query.value);
-  const response = await result.json()
-  console.log(response.results.Search)
-  data.value = await response.results.Search
+  isLoading.value = true;
+
+  // Define a timeout promise that rejects after 3 seconds
+  const timeout = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('Request timed out')), 3000)
+  );
+
+  // Attempt to fetch data from the first URL with a 3-second timeout
+  const todo = await Promise.race([
+    fetch('https://jsearch.lostmypillow.duckdns.org/api/get-movies/?query=' + query.value + "&limit=10&related=false"),
+    timeout
+  ]);
+
+  const response = await todo.json();
+  console.log(response.results.Search);
+  data.value = await response.results.Search;
+
 } catch (error) {
-  console.log(error)
-  sorry.value = true
-  const result = await fetch("https://jsearch-latest.onrender.com/get-movies/?query="+query.value);
-  const response = await result.json()
-  console.log(response.results.Search)
-  data.value = await response.results.Search
+  // If the first fetch failed or timed out, try the second URL
+  sorry.value = true;
+
+  try {
+    const todo = await fetch('https://jsearch-latest.onrender.com/get-movies/?query=' + query.value + "&limit=10&related=false");
+    const response = await todo.json();
+    console.log(response.results.Search);
+    data.value = await response.results.Search;
+  } catch (error) {
+    console.error('Both requests failed:', error);
+    // Handle the error if the second request also fails
+  }
+
 } finally {
-  console.log("search movies successful")
-  isLoading.value = false
-  sorry.value =false
+  console.log("search google completed");
+  isLoading.value = false;
+  sorry.value = false;
 }
 
-  // console.log(result.Search)
-  // console.log("searched movie")
 }
 
 async function getGoogle() {
 
 
-  
-  isLoading.value = true
 
   try {
-    const todo = await fetch('https://jsearch.lostmypillow.duckdns.org/api/get-google/?query='+query.value+"&limit=10&related=false")
-  const response = await todo.json()
-  console.log(response.results)
-  data.value = await response.results
-} catch (exceptionVar) {
-  sorry.value =true
-  const todo = await fetch('https://jsearch-latest.onrender.com/get-google/?query='+query.value+"&limit=10&related=false")
-  const response = await todo.json()
-  console.log(response.results)
-  data.value = await response.results
+  isLoading.value = true;
+
+  // Define a timeout promise that rejects after 3 seconds
+  const timeout = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('Request timed out')), 3000)
+  );
+
+  // Attempt to fetch data from the first URL with a 3-second timeout
+  const todo = await Promise.race([
+    fetch('https://jsearch.lostmypillow.duckdns.org/api/get-google/?query=' + query.value + "&limit=10&related=false"),
+    timeout
+  ]);
+
+  const response = await todo.json();
+  console.log(response.results);
+  data.value = await response.results;
+
+} catch (error) {
+  // If the first fetch failed or timed out, try the second URL
+  sorry.value = true;
+
+  try {
+    const todo = await fetch('https://jsearch-latest.onrender.com/get-google/?query=' + query.value + "&limit=10&related=false");
+    const response = await todo.json();
+    console.log(response.results);
+    data.value = await response.results;
+  } catch (error) {
+    console.error('Both requests failed:', error);
+    // Handle the error if the second request also fails
+  }
+
 } finally {
- console.log("search google successful")
- isLoading.value = false
- sorry.value =false
+  console.log("search google completed");
+  isLoading.value = false;
+  sorry.value = false;
 }
 
 }
@@ -128,7 +163,7 @@ async function getGoogle() {
     <div v-if="type == 'movies'"
       class="flex flex-col md:flex-row flex-wrap items-center justify-center w-full gap-4 pt-4">
 
-      <v-card class="min-w-full md:w-1/5 " v-for="movie in data" :key="movie.imdbID" :title="movie.Title" :subtitle="movie.Year"
+      <v-card class=" md:w-1/5 " v-for="movie in data" :key="movie.imdbID" :title="movie.Title" :subtitle="movie.Year"
         :text="movie.Type" variant="tonal">
 
         <v-img height="200px" :src="movie.Poster" cover />
@@ -138,39 +173,6 @@ async function getGoogle() {
     </div>
 
     <div v-else class="flex flex-col flex-wrap items-center justify-center w-full gap-4 pt-4">
- 
-      <!-- <v-card v-if="data.knowledge_panel != null" class="md:w-2/3" :title="data.knowledge_panel.name" :subtitle="data.knowledge_panel.label"
-        :text="data.knowledge_panel.description.text" variant="tonal">
-        <v-img :height="data.knowledge_panel.image.height" :width="data.knowledge_panel.image.width"
-          :src="data.knowledge_panel.image.url" cover />
-
-        <a class="px-4 underline text-blue-500" :href="data.knowledge_panel.description.url">
-          Source:
-          {{ data.knowledge_panel.description.site }}
-        </a>
-
-        <div v-if="expand" class="py-2 px-4">
-          <v-list lines="one">
-
-            <v-list-item v-for="n in data.knowledge_panel.info" :title="n.title">
-
-              <template v-slot:subtitle>
-                <p v-for="s in n.labels">{{ s }}</p>
-              </template>
-
-            </v-list-item>
-
-          </v-list>
-
-        </div>
-
-        <v-card-actions>
-
-          <v-btn :text="!expand ? 'More Info' : 'Hide Info'" @click="expand = !expand" />
-
-        </v-card-actions>
-
-      </v-card> -->
    
       <v-card class="md:w-2/3 " v-for="result in data.results" :key="result.position" :title="result.title"
         :subtitle="result.url" :text="result.description" :href="result.url" variant="tonal" />
