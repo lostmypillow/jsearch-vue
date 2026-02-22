@@ -53,39 +53,13 @@ async function getALl() {
 
 async function getMovies() {
 
-  try {
-  isLoading.value = true;
-
-  // Define a timeout promise that rejects after 3 seconds
-  const timeout = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error('Request timed out')), 3000)
-  );
-
-  // Attempt to fetch data from the first URL with a 3-second timeout
-  const todo = await Promise.race([
-    fetch('https://jsearch.lostmypillow.duckdns.org/api/get-movies/?query=' + query.value + "&limit=10&related=false"),
-    timeout
-  ]);
-
-  const response = await todo.json();
-  console.log(response.results.Search);
-  data.value = await response.results.Search;
-
-} catch (error) {
-  // If the first fetch failed or timed out, try the second URL
-  sorry.value = true;
 
   try {
-    const todo = await fetch('https://jsearch-latest.onrender.com/get-movies/?query=' + query.value + "&limit=10&related=false");
+    const todo = await fetch('https://jsearch-api.onrender.com/get-movies/?query=' + query.value + "&limit=10&related=false");
     const response = await todo.json();
     console.log(response.results.Search);
     data.value = await response.results.Search;
-  } catch (error) {
-    console.error('Both requests failed:', error);
-    // Handle the error if the second request also fails
-  }
-
-} finally {
+  }  finally {
   console.log("search google completed");
   isLoading.value = false;
   sorry.value = false;
@@ -94,42 +68,12 @@ async function getMovies() {
 }
 
 async function getGoogle() {
-
-
-
   try {
-  isLoading.value = true;
-
-  // Define a timeout promise that rejects after 3 seconds
-  const timeout = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error('Request timed out')), 3000)
-  );
-
-  // Attempt to fetch data from the first URL with a 3-second timeout
-  const todo = await Promise.race([
-    fetch('https://jsearch.lostmypillow.duckdns.org/api/get-google/?query=' + query.value + "&limit=10&related=false"),
-    timeout
-  ]);
-
-  const response = await todo.json();
-  console.log(response.results);
-  data.value = await response.results;
-
-} catch (error) {
-  // If the first fetch failed or timed out, try the second URL
-  sorry.value = true;
-
-  try {
-    const todo = await fetch('https://jsearch-latest.onrender.com/get-google/?query=' + query.value + "&limit=10&related=false");
+    const todo = await fetch('https://jsearch-api.onrender.com/get-google/?query=' + query.value + "&limit=10&related=false");
     const response = await todo.json();
     console.log(response.results);
     data.value = await response.results;
-  } catch (error) {
-    console.error('Both requests failed:', error);
-    // Handle the error if the second request also fails
-  }
-
-} finally {
+  } finally {
   console.log("search google completed");
   isLoading.value = false;
   sorry.value = false;
