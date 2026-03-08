@@ -1,16 +1,19 @@
-# JSearch
+# JSearch0 Frontend
+> This is a prototype website, denoted by the 0 in the name "JSearch0". Expect bugs.
+
+> This is the repository for the Nuxt frontend, if you're looking for JSearch0 API's  GitHub repository, it's here: https://github.com/lostmypillow/jsearch
+
 ## What is it?
-A full stack search engine for movies and Google search. Consumes OMDb API and a random rate limited RapidAPI.
 
-Works with the [FastAPI server in this repo](https://github.com/lostmypillow/jsearch). API hosted on my own RPi 3B+, automatically switches to backup API hosted on Render.com in case RPi is down.
+- A full stack search engine for movies and Google search. Consumes OMDb API and a rate limited RapidAPI that returns Google search results.
 
-Features dark/light mode switch.
+- Works with the API hosted on Render.
 
+- Features dark/light mode switch.
 
-[**Demo website**](https://lostmypillow.github.io/jsearch-vue)
-[**API Documentation**](https://jsearch.lostmypillow.duckdns.org/docs)
+- [**Demo website**](https://jsearch0.chodanpillow.com)
 
-[**Backup API Docs (Render.com's free tier so might be slow to load!)**](https://jsearch.onrender.com/docs)
+- [**API Documentation**](https://jsearch-api.onrender.com/docs)
 
 ## How does it work?
 1. User inputs a value in Vue frontend
