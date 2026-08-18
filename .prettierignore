@@ -1,0 +1,7 @@
+# Exclude any folder named 'hbs' at any level of the project
+**/hbs/
+
+
+lib/
+dist/
+dependency-check-report.html

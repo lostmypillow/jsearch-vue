@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
+  compatibilityDate: '2026-08-18',
   modules: [
      '@nuxtjs/tailwindcss',
      (_options, nuxt) => {
